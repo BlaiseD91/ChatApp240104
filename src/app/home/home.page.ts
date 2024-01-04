@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BaseService } from '../base.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,13 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  newMessage:any
+  constructor(private base:BaseService) {}
+
+  addMessage(){
+    let time = new Date().toLocaleTimeString()
+    let body={name:"Balázs", time: time, message:this.newMessage}
+    this.base.addMessage(body)
+  }
 
 }
