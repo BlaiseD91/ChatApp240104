@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BaseService } from '../base.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -9,12 +10,24 @@ import { BaseService } from '../base.service';
 export class HomePage {
 
   newMessage:any
-  constructor(private base:BaseService) {}
+  messages:any
+  constructor(private base:BaseService) {
+    this.base.getMessages().snapshotChanges().pipe(
+      map(
+        (changes) => changes.map(
+          (c) => ({key:c.payload.key, ...c.payload.val()})
+        )
+      )
+    ).subscribe(
+      (res) => this.messages = res
+    )
+  }
 
   addMessage(){
     let time = new Date().toLocaleTimeString()
-    let body={name:"Balázs", time: time, message:this.newMessage}
+    let body = {name:"Balázs", time: time, message:this.newMessage}
     this.base.addMessage(body)
+    this.newMessage = ""
   }
 
 }
