@@ -14,11 +14,32 @@
   </ion-header>
 
   <div class="container my-3">
+    <h2>Messages</h2>
     <div *ngFor="let message of messages" class="row">
-      {{message|json}}
+      <div [ngClass]="message.name=='Balázs'?'d-flex justify-content-end':''" class="col-10">
+        <div>{{message.time}} {{message.name}}</div>
+        <ng-container *ngIf="message.name=='Balázs'; else nemEn">
+          <div class="col-4">
+            <ion-textarea class="mx-1" fill="outline" placeholder="" [(ngModel)]="message.message"></ion-textarea>
+            <ion-button fill="solid" color="warning" (click)="updateMessage(message)">Change</ion-button>
+            <ion-button fill="solid" color="danger" (click)="deleteMessage(message)">Delete</ion-button>
+          </div>
+        </ng-container>
+        <ng-template #nemEn>
+          <div>{{message.message}}</div>
+        </ng-template>
+        
+        <br>
+      </div>
+
+      <div *ngIf="message.name=='Balázs'" class="col">
+        
+      </div>
+      
+
     </div>
 
-    <ion-textarea class="my-2" label="Message" labelPlacement="floating" fill="outline" placeholder="Enter text" [(ngModel)]="newMessage"></ion-textarea>
+    <ion-textarea class="my-5" label="Message" labelPlacement="floating" fill="outline" placeholder="Enter text" [(ngModel)]="newMessage"></ion-textarea>
     <ion-buttons slot="secondary" class="ion-justify-content-center">
       <ion-button fill="solid" (click)="addMessage()">
         Send

@@ -30,4 +30,11 @@ export class HomePage {
     this.newMessage = ""
   }
 
+  deleteMessage(message:any){
+    this.base.deleteMessage(message)
+  }
+
+  updateMessage(message:any){
+    this.base.updateMessage(message)
+  }
 }

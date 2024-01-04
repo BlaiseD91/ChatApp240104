@@ -9,7 +9,7 @@ export class BaseService {
   messages:AngularFireList<any>
   
   constructor(private db:AngularFireDatabase) { 
-    this.messages = this.db.list('messages')
+    this.messages = this.db.list('/messages')
   }
 
   getMessages(){
