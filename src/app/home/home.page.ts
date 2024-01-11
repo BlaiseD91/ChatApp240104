@@ -11,6 +11,8 @@ export class HomePage {
 
   newMessage:any
   messages:any
+  userName = "Balázs"
+
   constructor(private base:BaseService) {
     this.base.getMessages().snapshotChanges().pipe(
       map(
@@ -25,7 +27,7 @@ export class HomePage {
 
   addMessage(){
     let time = new Date().toLocaleTimeString()
-    let body = {name:"Balázs", time: time, message:this.newMessage}
+    let body = {name:this.userName, time: time, message:this.newMessage}
     this.base.addMessage(body)
     this.newMessage = ""
   }

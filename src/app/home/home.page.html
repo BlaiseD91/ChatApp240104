@@ -16,9 +16,9 @@
   <div class="container my-3">
     <h2>Messages</h2>
     <div *ngFor="let message of messages" class="row">
-      <div [ngClass]="message.name=='Balázs'?'d-flex justify-content-end':''" class="col-10">
+      <div [ngClass]="message.name==userName?'d-flex justify-content-end':''" class="col-10">
         <div>{{message.time}} {{message.name}}</div>
-        <ng-container *ngIf="message.name=='Balázs'; else nemEn">
+        <ng-container *ngIf="message.name==userName; else nemEn">
           <div class="col-4">
             <ion-textarea class="mx-1" fill="outline" placeholder="" [(ngModel)]="message.message"></ion-textarea>
             <ion-button fill="solid" color="warning" (click)="updateMessage(message)">Change</ion-button>
